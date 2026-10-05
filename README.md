@@ -13,7 +13,8 @@ nach draußen — und auf Wunsch die **Dateiauswahl des ganzen Systems** (XDG-Po
 ## Bauen und installieren
 
 ```bash
-cd packaging/arch
+git clone https://github.com/janluca-dev/noctis-files.git
+cd noctis-files/packaging/arch
 makepkg -si
 ```
 
