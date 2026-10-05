@@ -1,0 +1,12 @@
+[Unit]
+Description=Noctis Files als Dateiauswahl des Systems (XDG-Portal-Backend)
+PartOf=graphical-session.target
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.impl.portal.desktop.noctis
+ExecStart=/usr/bin/python3 @NF_LIBDIR@/portal.py
+Environment=NOCTIS_FILES_BIN=@CMAKE_INSTALL_PREFIX@/bin/noctis-files
+Restart=on-failure
+RestartSec=2
+Slice=session.slice

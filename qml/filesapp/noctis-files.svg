@@ -1,0 +1,62 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Noctis Files.
+
+    Das Noctis-Zeichen ist eine Mondsichel mit drei absteigenden Punkten. Bei
+    der Wetter-App wurden die Punkte zu Tropfen; hier werden sie zu Blättern —
+    drei Seiten, die aus einem Ordner herausschauen. Sichel, Staffelung und
+    die drei Farben des Verlaufs bleiben, was sie im System sind. Ein eigenes
+    Zeichen zu erfinden hieße, die Verwandtschaft wegzuwerfen, die schon da
+    war.
+  -->
+  <defs>
+    <linearGradient id="mond" gradientUnits="userSpaceOnUse"
+                    x1="100" y1="64" x2="308" y2="272">
+      <stop offset="0%"   stop-color="#7dcfff"/>
+      <stop offset="55%"  stop-color="#7aa2f7"/>
+      <stop offset="100%" stop-color="#bb9af7"/>
+    </linearGradient>
+    <!-- userSpaceOnUse: sonst rechnet SVG den Verlauf für JEDE Form einzeln
+         über deren eigenen Kasten — und dort, wo Lasche und Korpus des
+         Ordners aneinanderstoßen, stünde eine sichtbare Naht. -->
+    <linearGradient id="mappe" gradientUnits="userSpaceOnUse"
+                    x1="120" y1="254" x2="330" y2="440">
+      <stop offset="0%"   stop-color="#dbe3f7"/>
+      <stop offset="100%" stop-color="#93a6d8"/>
+    </linearGradient>
+    <filter id="schein" x="-90%" y="-90%" width="280%" height="280%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <mask id="sichel">
+      <rect x="0" y="0" width="512" height="512" fill="white"/>
+      <circle cx="234" cy="118" r="92" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Sichel. Gleiche Bauart wie im Systemzeichen: ein Kreis, aus dem ein
+       versetzter zweiter herausgeschnitten ist. -->
+  <circle cx="186" cy="162" r="96" fill="url(#mond)" mask="url(#sichel)"/>
+
+  <!-- Die drei Blätter. Lage und Staffelung der „drift orbs“ des
+       Systemzeichens, nur als Seiten: das hinterste am kleinsten und am
+       blassesten. Sie liegen VOR der Sichel und HINTER dem Ordner — daraus
+       entsteht die Tiefe. Ihre Unterkanten verschwinden hinter dem Ordner,
+       deshalb reichen sie absichtlich zu weit nach unten. -->
+  <g filter="url(#schein)">
+    <rect x="298" y="172" width="84" height="150" rx="16" fill="#bb9af7" opacity="0.72"/>
+    <rect x="250" y="196" width="90" height="140" rx="17" fill="#7aa2f7" opacity="0.90"/>
+    <rect x="200" y="220" width="96" height="130" rx="18" fill="#7dcfff"/>
+  </g>
+
+  <!-- Der Ordner davor: Lasche links, Korpus, eine Kante Licht. Deckend,
+       damit er sich von den Blättern absetzt — halbdurchsichtig würde bei
+       32 Punkten Kantenlänge alles zu einem Fleck. -->
+  <path fill="url(#mappe)"
+        d="M126 238 h58 q11 0 18 9 l25 35 h159 a30 30 0 0 1 30 30
+           v88 a30 30 0 0 1 -30 30 H126 a30 30 0 0 1 -30 -30
+           V268 a30 30 0 0 1 30 -30 Z"/>
+  <!-- Die Lichtkante auf dem Ordner: dasselbe Mittel wie bei einer
+       Noctis-Scheibe, ein Hauch Weiß innen an der Oberkante. -->
+  <rect x="124" y="300" width="264" height="5" rx="2.5" fill="#ffffff" opacity="0.45"/>
+</svg>

@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Noctis Files
+GenericName=Dateimanager
+GenericName[en]=File Manager
+Comment=Dateien durchsehen, ordnen und weitergeben
+Comment[en]=Browse, organise and share files
+Exec=noctis-files %U
+Icon=noctis-files
+Terminal=false
+StartupNotify=true
+StartupWMClass=noctis-files
+Categories=Utility;Core;System;FileTools;FileManager;Qt;
+Keywords=Dateien;Files;Ordner;Folder;Verwaltung;Explorer;Manager;
+MimeType=inode/directory;

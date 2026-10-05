@@ -1,0 +1,48 @@
+# Maintainer: janluca-dev <jan@waschbusch.dev>
+#
+# Baut Noctis Files aus dem Quellbaum, in dem dieses PKGBUILD liegt:
+#     cd packaging/arch && makepkg -si
+#
+# Das PKGBUILD liegt bewusst NICHT an der Wurzel: makepkg legt neben sich
+# einen Ordner src/ an (und räumt ihn mit -C weg) — an der Wurzel wäre das
+# der Ordner mit den C++-Quellen.
+pkgname=noctis-files
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Dateimanager auf der Designsprache Noctis — Raster, Liste, Schnellansicht, Reiter, Papierkorb, Dateidialog"
+arch=('x86_64' 'aarch64')
+license=('LicenseRef-noctis-files' 'OFL-1.1')
+depends=(
+    'qt6-base' 'qt6-declarative' 'qt6-svg' 'qt6-wayland'
+    'python' 'glib2' 'xdg-utils' 'inotify-tools' 'file' 'util-linux' 'coreutils'
+    'ttf-iosevka-nerd' 'ttf-jetbrains-mono'
+)
+makedepends=('cmake' 'ninja')
+optdepends=(
+    'python-gobject: Noctis Files als Dateidialog des Systems (XDG-Portal)'
+    'ffmpeg: Vorschaubilder für Filme'
+    'poppler: Vorschaubilder für PDF'
+    'imagemagick: Vorschaubilder für TIFF, PSD, HEIC, RAW'
+    'udisks2: Laufwerke ein- und aushängen'
+    'libarchive: weitere Archivformate entpacken (7z, rar, …)'
+    'wl-clipboard: kopierte Pfade bleiben nach dem Schließen in der Ablage (Wayland)'
+)
+provides=('noctis-files')
+conflicts=('noctis-files-git')
+options=('!debug')
+
+_root() { realpath "$startdir/../.."; }
+
+build() {
+    cmake -S "$(_root)" -B build -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr
+    cmake --build build
+}
+
+package() {
+    DESTDIR="$pkgdir" cmake --install build
+    install -Dm644 "$(_root)/data/fonts/OFL-1.1.txt" \
+        "$pkgdir/usr/share/licenses/$pkgname/Outfit-OFL-1.1.txt"
+    install -Dm644 "$(_root)/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.freedesktop.impl.portal.desktop.noctis
+Exec=/usr/bin/python3 @NF_LIBDIR@/portal.py
+SystemdService=noctis-files-portal.service
